@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+twits
+<ul>
+
+    {% for twit in twits %}
+        <li>
+            username : {{ twit.owner.user.first_name }} <br>
+            body : {{ twit.title }}<br>{{ twit.body }} <br><br>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

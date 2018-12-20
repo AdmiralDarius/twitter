@@ -12,6 +12,7 @@ class TwitterUser(models.Model):
 class Twit(models.Model):
     owner = models.ForeignKey(TwitterUser,on_delete=models.DO_NOTHING)
     date = models.DateField()
+    title = models.CharField(max_length=100,default='title')
     body = models.CharField(max_length=300)
 
 class SavedRequests(models.Model):

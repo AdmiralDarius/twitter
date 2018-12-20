@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action={% url 'api:user_register' %} method="post">
+  {% csrf_token %}
+  <div>
+    <label for="name">UserName:</label>
+    <input type="text" id="user_name" name="user_name">
+  </div>
+  <div>
+    <label for="name">VisibleName:</label>
+    <input type="text" id="visible_name" name="visible_name">
+  </div>
+
+  <div>
+    <label for="name">Password:</label>
+    <input type="password" id="user_password" name="user_password">
+  </div>
+  <div>
+    <label for="mail">E-mail:</label>
+    <input type="email" id="mail" name="user_mail">
+  </div>
+
+  <div>
+    <input type="submit">Submit</input>
+  </div>
+</form>
+
+<form action={% url 'api:login' %} method="post">
+  {% csrf_token %}
+  <div>
+    <label for="name">UserName:</label>
+    <input type="text" id="luser_name" name="luser_name">
+  </div>
+
+  <div>
+    <label for="name">Password:</label>
+    <input type="password" id="luser_password" name="luser_password">
+  </div>
+  <div>
+    <input type="submit">Submit</input>
+  </div>
+</form>
+
+</body>
+</html>
