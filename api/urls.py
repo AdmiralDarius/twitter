@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework.authtoken import views as rest_view
 
 from . import views
 
@@ -13,5 +14,8 @@ urlpatterns = [
     path('save_twits/', views.save_twits, name='save_twits'),
     path('user_register/', views.user_register, name='user_register'),
     path('login_page/', views.login_page, name='login_page'),
-    #path(r'login_page/?next=([a-zA-Z0-9/]*)', views.login_fix, name='login_fix'),
+    path('v1/login/', rest_view.obtain_auth_token, name='token_login'),
+    path('v1/tweet/', views.token_twits, name='api_save_twit'),
+    path('v2/tweet/', views.token_generate, name='token_generator'),
+    # path(r'login_page/?next=([a-zA-Z0-9/]*)', views.login_fix, name='login_fix'),
 ]
