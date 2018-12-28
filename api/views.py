@@ -11,8 +11,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from django.contrib.sessions.models import Session
 
-NN=10000
+NN=1000
 HH=2
+
+
+def darius_time(time1, time2, HH):
+    import datetime
+    time11 = datetime.datetime(time1.year, time1.month, time1.day, time1.hour, time1.minute, time1.second)
+    time22 = datetime.datetime(time2.year, time2.month, time2.day, time2.hour, time2.minute, time2.second)
+    timediff=time11-time22
+    return timediff.total_seconds()<HH
+
 
 def process_request(func):
 
@@ -25,7 +34,7 @@ def process_request(func):
         now.save()
 
         #first and second part
-        res=list(reversed(list(SavedRequests.objects.order_by('time'))))
+        res=list((list(SavedRequests.objects.order_by('time'))))
         unautho_reqs = 0
         for i in range(len(res)):
 
@@ -34,13 +43,15 @@ def process_request(func):
 
             j=i+1
             reqs_sent=0
-            while(j<len(res) and res[j].time.second-res[i].time.second<HH):
-                #print(res[j].time.second - res[i].time.second)
+
+            while(j<len(res) and darius_time(res[j].time,res[i].time,HH)):
+                #print(darius_time(res[j].time,res[i].time,HH))
+
                 if res[j].ip==request.META['REMOTE_ADDR']:
                     reqs_sent+=1
                 j+=1
             if reqs_sent>=NN or unautho_reqs>NN:
-                return HttpResponse(status=404)
+                return HttpResponse(status=404,reason="you are malicious")
 
 
         return func(request)
