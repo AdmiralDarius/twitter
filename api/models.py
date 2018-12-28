@@ -5,7 +5,18 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+from django.conf import settings
 
+"""
+#Model to store the list of logged in users
+class LoggedInUser(models.Model):
+    user = models.OneToOneField(User, related_name='logged_in_user',on_delete=models.DO_NOTHING)
+    # Session keys are 32 characters long
+    session_key = models.CharField(max_length=32, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+"""
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
@@ -22,6 +33,7 @@ class TwitterUser(models.Model):
     avatar = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
 
 
+
 class Twit(models.Model):
     owner = models.ForeignKey(TwitterUser, on_delete=models.DO_NOTHING)
     date = models.DateField()
@@ -31,5 +43,8 @@ class Twit(models.Model):
 
 class SavedRequests(models.Model):
     ip = models.CharField(max_length=30)
-    date = models.DateField()
+    time = models.DateTimeField(auto_now=True)
     explorer = models.CharField(max_length=50)
+    auth = models.BooleanField(default=True)
+    def __str__(self):
+        return self.ip + repr(self.time) + repr(self.explorer) + repr(self.auth)

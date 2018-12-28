@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'api.middleware.OneSessionPerUserMiddleware',
 ]
 
 ROOT_URLCONF = 'twitter.urls'
@@ -127,3 +128,5 @@ REST_FRAMEWORK = {
     )
 
 }
+#HW3 part 3
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
