@@ -1,5 +1,5 @@
 #Session model stores the session data
-"""
+
 from django.contrib.sessions.models import Session
 
 class OneSessionPerUserMiddleware:
@@ -29,4 +29,3 @@ class OneSessionPerUserMiddleware:
         # For this tutorial, we're not adding any code so we just return the response
 
         return response
-"""
