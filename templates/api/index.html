@@ -8,43 +8,49 @@
 
 welcome {{ user.first_name }}
 {% if TwitterUser.avatar %}
-    <img height="200px" src={{ TwitterUser.avatar.url }} >
+    <img height="200px" src={{ TwitterUser.avatar.url }}>
 {% endif %}
-<br><hr>
-<form action={% url 'api:save_twits' %} method="post">
-  {% csrf_token %}
-  <div>
-    <label for="name">new twit:</label><br>
-    <input type="text"  id="twit_body" name="twit_title">
-  </div>
-  <div>
-    <label for="name">new twit:</label><br>
-    <textarea  id="twit_body" name="twit_body"></textarea>
-  </div>
+<br>
+<hr>
+<form action='{% url 'api:save_twits' %}' method="post">
+    {% csrf_token %}
+    <div>
+        <label for="name">new twit:</label><br>
+        <input type="text" id="twit_body" name="twit_title">
+    </div>
+    <div>
+        <label for="name">new twit:</label><br>
+        <textarea id="twit_body" name="twit_body"></textarea>
+    </div>
 
-  <div>
-    <button type="submit">save twit</button>
-  </div>
+    <div>
+        <button type="submit">save twit</button>
+    </div>
 </form>
 
-<form action={% url 'api:save_pic' %} method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div>
-    <label for="name">new pic:</label><br>
-    <input type="file"  id="avatar_pic" name="avatar_pic">
-  </div>
+<form action='{% url 'api:save_pic' %}' method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label for="name">new pic:</label><br>
+        <input type="file" id="avatar_pic" name="avatar_pic">
+    </div>
 
-  <div>
-    <button type="submit">save avatar</button>
-  </div>
+    <div>
+        <button type="submit">save avatar</button>
+    </div>
+</form>
+
+<form action="{% url 'api:token_generator' %}" method="post">
+    {% csrf_token %}
+    <button name="token_generate">Generate New Token</button>
 </form>
 <br>
 twits:
 <hr>
 <ul>
-{% for twit in twits %}
-    <li>{{ twit.title }}<br>{{ twit.body }}<br><br></li>
-{% endfor %}
+    {% for twit in twits %}
+        <li>{{ twit.title }}<br>{{ twit.body }}<br><br></li>
+    {% endfor %}
 </ul>
 
 </body>
