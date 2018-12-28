@@ -7,16 +7,16 @@ from rest_framework.authtoken.models import Token
 
 from django.conf import settings
 
+"""
+#Model to store the list of logged in users
+class LoggedInUser(models.Model):
+    user = models.OneToOneField(User, related_name='logged_in_user',on_delete=models.DO_NOTHING)
+    # Session keys are 32 characters long
+    session_key = models.CharField(max_length=32, null=True, blank=True)
 
-# Model to store the list of logged in users
-#class LoggedInUser(models.Model):
-#    user = models.OneToOneField(User, related_name='logged_in_user',on_delete=models.DO_NOTHING)
-#    # Session keys are 32 characters long
-#    session_key = models.CharField(max_length=32, null=True, blank=True)
-#
-#    def __str__(self):
-#        return self.user.username
-
+    def __str__(self):
+        return self.user.username
+"""
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
