@@ -46,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'api.middleware.OneSessionPerUserMiddleware',
 ]
 
 ROOT_URLCONF = 'twitter.urls'
@@ -117,3 +118,5 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,"/media_root/")
 LOGIN_URL="/api/login_page/"
+#HW3 part 3
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
